@@ -1,0 +1,177 @@
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE LENGTH(ENAME)= 4;
+
+ENAME                                                                           
+----------                                                                      
+WARD                                                                            
+KING                                                                            
+FORD                                                                            
+
+SQL> SELECT JOB
+  2  FROM EMP
+  3  WHERE LENGTH(JOB)= 7;
+
+JOB                                                                             
+---------                                                                       
+MANAGER                                                                         
+MANAGER                                                                         
+MANAGER                                                                         
+ANALYST                                                                         
+ANALYST                                                                         
+
+SQL> SELECT LENGTH('QSPIDERS'
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00907: missing right parenthesis 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT LENGTH('QSPIDERS') - LENGTH(REPLACE('QSPIDERS','S'))
+  2* FROM DUAL
+  3  /
+
+LENGTH('QSPIDERS')-LENGTH(REPLACE('QSPIDERS','S'))                              
+--------------------------------------------------                              
+                                                 2                              
+
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE SUBSTR(JOB,LENGTH(JOB),-2,3);
+WHERE SUBSTR(JOB,LENGTH(JOB),-2,3)
+                                 *
+ERROR at line 3:
+ORA-00920: invalid relational operator 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME
+  2  FROM EMP
+  3* WHERE SUBSTR(JOB,LENGTH(JOB),-2,3)= 'MAN'
+SQL> /
+WHERE SUBSTR(JOB,LENGTH(JOB),-2,3)= 'MAN'
+                                *
+ERROR at line 3:
+ORA-00939: too many arguments for function 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME
+  2  FROM EMP
+  3* WHERE SUBSTR(JOB, LENGTH(JOB)-2 , 3)= 'MAN'
+SQL> /
+
+ENAME                                                                           
+----------                                                                      
+ALLEN                                                                           
+WARD                                                                            
+MARTIN                                                                          
+TURNER                                                                          
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT JOB
+  2  FROM EMP
+  3* WHERE SUBSTR(JOB, LENGTH(JOB)-2 , 3)= 'MAN'
+SQL> /
+
+JOB                                                                             
+---------                                                                       
+SALESMAN                                                                        
+SALESMAN                                                                        
+SALESMAN                                                                        
+SALESMAN                                                                        
+
+SQL> SELECT JOB
+  2  FROM EMP
+  3  WHERE SUBSTR(JOB, 1, 3) = 'MAN';
+
+JOB                                                                             
+---------                                                                       
+MANAGER                                                                         
+MANAGER                                                                         
+MANAGER                                                                         
+
+SQL> SELECT DNAME
+  2  FROM DEPT
+  3  WHERE DNAME LIKE '%O%';
+
+DNAME                                                                           
+--------------                                                                  
+ACCOUNTING                                                                      
+OPERATIONS                                                                      
+
+SQL> SELECT LENGTH('HELLLLL')-LENGTH(REPLACE('HELLLLL','L'))
+  2  FROM DUAL;
+
+LENGTH('HELLLLL')-LENGTH(REPLACE('HELLLLL','L'))                                
+------------------------------------------------                                
+                                               5                                
+
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE LENGTH(ENAME)-LENGTH(REPLACE(ENAME,'L'))=1;
+
+ENAME                                                                           
+----------                                                                      
+BLAKE                                                                           
+CLARK                                                                           
+
+SQL> SELECT LOWER(SUBSTR(ENAME,1,3))|| UPPER(SUBSTR(ENAME,4))
+  2  FROM EMP;
+
+LOWER(SUBS                                                                      
+----------                                                                      
+smiTH                                                                           
+allEN                                                                           
+warD                                                                            
+jonES                                                                           
+marTIN                                                                          
+blaKE                                                                           
+claRK                                                                           
+scoTT                                                                           
+kinG                                                                            
+turNER                                                                          
+adaMS                                                                           
+
+LOWER(SUBS                                                                      
+----------                                                                      
+jamES                                                                           
+forD                                                                            
+milLER                                                                          
+
+14 rows selected.
+
+SQL> SET LINES 200 PAGES 200
+SQL> SELECT LOWER(SUBSTR(ENAME,1,3))|| UPPER(SUBSTR(ENAME,4))
+  2  FROM EMP;
+
+LOWER(SUBS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+smiTH                                                                                                                                                                                                   
+allEN                                                                                                                                                                                                   
+warD                                                                                                                                                                                                    
+jonES                                                                                                                                                                                                   
+marTIN                                                                                                                                                                                                  
+blaKE                                                                                                                                                                                                   
+claRK                                                                                                                                                                                                   
+scoTT                                                                                                                                                                                                   
+kinG                                                                                                                                                                                                    
+turNER                                                                                                                                                                                                  
+adaMS                                                                                                                                                                                                   
+jamES                                                                                                                                                                                                   
+forD                                                                                                                                                                                                    
+milLER                                                                                                                                                                                                  
+
+14 rows selected.
+
+SQL> SPOOL OFF;
