@@ -1,0 +1,74 @@
+SQL> SELECT EMPNO
+  2  FROM EMP
+  3  WHERE SAL <2000 AND DEPTNO IN 10;
+
+     EMPNO                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      7934                                                                                                                                                                                              
+
+SQL> SELECT SUM(SAL)
+  2  FROM EMP
+  3  WHERE JOB IN 'CLERK';
+
+  SUM(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      4150                                                                                                                                                                                              
+
+SQL> SELECT AVG(SAL)
+  2  FROM EMP
+  3  ;
+
+  AVG(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+2073.21429                                                                                                                                                                                              
+
+SQL> SELECT COUNT(EMPNO)
+  2  FROM EMP
+  3  WHERE JOB IN ('CLERK','MANAGER');
+
+COUNT(EMPNO)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+           7                                                                                                                                                                                            
+
+SQL> SELECT SUM(SAL)
+  2  FROM EMP
+  3  WHERE HIREDATE LIKE '__-FEB-__';
+
+  SUM(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      2850                                                                                                                                                                                              
+
+SQL> SELECT COUNT(EMPNO)
+  2  FROM EMP
+  3  WHERE MGR IN 7839;
+
+COUNT(EMPNO)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+           3                                                                                                                                                                                            
+
+SQL> SELECT COUNT(EMONO)
+  2  FROM EMP
+  3  WHERE COMM IS NOT NULL AND COMM !=0 AND DEPTNO IN 30;
+SELECT COUNT(EMONO)
+             *
+ERROR at line 1:
+ORA-00904: "EMONO": invalid identifier 
+
+
+SQL> SELECT COUNT(EMPNO)
+  2  FROM EMP
+  3  WHERE COMM IS NOT NULL AND COMM !=0 AND DEPTNO IN 30;
+
+COUNT(EMPNO)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+           3                                                                                                                                                                                            
+
+SQL> SELECT AVG(SAL),SUM(SAL),COUNT(EMPNO),MAX(SAL)
+  2  FROM EMP
+  3  WHERE JOB IN 'PRESIDENT';
+
+  AVG(SAL)   SUM(SAL) COUNT(EMPNO)   MAX(SAL)                                                                                                                                                           
+---------- ---------- ------------ ----------                                                                                                                                                           
+      5000       5000            1       5000                                                                                                                                                           
+
+SQL> SPOOL OFF;

@@ -1,0 +1,144 @@
+SQL> SET LINES 200 PAGES 200;
+SQL> SELECT COUNT(EMPNO)
+  2  FROM EMP
+  3  WHERE JOB NOT IN 'PRESIDENT'
+  4  GROUP BY DEPTNO;
+
+COUNT(EMPNO)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+           6                                                                                                                                                                                            
+           5                                                                                                                                                                                            
+           2                                                                                                                                                                                            
+
+SQL> SELECT SUM(SAL)
+  2  FROM EMP
+  3  GROUPBY JOB;
+GROUPBY JOB
+        *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT SUM(SAL)
+  2  FROM EMP
+  3  GROUP BY JOB;
+
+  SUM(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      4150                                                                                                                                                                                              
+      5600                                                                                                                                                                                              
+      5000                                                                                                                                                                                              
+      8275                                                                                                                                                                                              
+      6000                                                                                                                                                                                              
+
+SQL> SELECT COUNT(EMPNO)
+  2  FROM EMP
+  3  WHERE JOB IN 'MANAGER'
+  4  GROUP BY DEPTNO;
+
+COUNT(EMPNO)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+           1                                                                                                                                                                                            
+           1                                                                                                                                                                                            
+           1                                                                                                                                                                                            
+
+SQL> SELECT AVG(SAL)
+  2  FROM EMP
+  3  WHERE DEPTNO NOT IN 20
+  4  GROUP BY DEPTNO;
+
+  AVG(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+1566.66667                                                                                                                                                                                              
+2916.66667                                                                                                                                                                                              
+
+SQL> SELECT COUNT(EMPNO)
+  2  FROM EMP
+  3  WHERE ENAME LIKE'%A'
+  4  GROUP BY JOB;
+
+no rows selected
+
+SQL> SELECT COUNT(EMPNO),AVG(SAL)
+  2  FROM EMP
+  3  WHERE SAL>2000
+  4  GROUP BY DEPTNO;
+
+COUNT(EMPNO)   AVG(SAL)                                                                                                                                                                                 
+------------ ----------                                                                                                                                                                                 
+           1       2850                                                                                                                                                                                 
+           3 2991.66667                                                                                                                                                                                 
+           2       3725                                                                                                                                                                                 
+
+SQL> SELECT SUM(SAL)
+  2  FROM EMP
+  3  ;
+
+  SUM(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+     29025                                                                                                                                                                                              
+
+SQL> SELECT SUM(SAL),COUNT(EMPNO)
+  2  FROM EMP
+  3  WHERE JOB IN 'SALESMANS'
+  4  GROUP BY DEPTNO;
+
+no rows selected
+
+SQL> SELECT COUNT(EMPNO)
+  2  FROM EMP
+  3  GROUP BY JOB
+  4  ;
+
+COUNT(EMPNO)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+           4                                                                                                                                                                                            
+           4                                                                                                                                                                                            
+           1                                                                                                                                                                                            
+           3                                                                                                                                                                                            
+           2                                                                                                                                                                                            
+
+SQL> SELECT COUNT(EMPNO),MAX(SAL)
+  2  FROM EMP
+  3  GROUP BY JOB;
+
+COUNT(EMPNO)   MAX(SAL)                                                                                                                                                                                 
+------------ ----------                                                                                                                                                                                 
+           4       1300                                                                                                                                                                                 
+           4       1600                                                                                                                                                                                 
+           1       5000                                                                                                                                                                                 
+           3       2975                                                                                                                                                                                 
+           2       3000                                                                                                                                                                                 
+
+SQL> SELECT MAX(SAL)
+  2  FROM EMP
+  3  GROUP BY DEPTNO;
+
+  MAX(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      2850                                                                                                                                                                                              
+      3000                                                                                                                                                                                              
+      5000                                                                                                                                                                                              
+
+SQL> SELECT COUNT(SAL)
+  2  FROM EMP
+  3  GROUP BY SAL;
+
+COUNT(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+
+12 rows selected.
+
+SQL> SPOOL OFF;
