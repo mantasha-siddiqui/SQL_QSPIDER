@@ -1,0 +1,131 @@
+
+SQL> RENAME CUSTOMER TO STUDENT;
+
+Table renamed.
+
+  1  ALTER TABLE STUDENT
+  2* ADD MAILID VARCHAR(20) UNIQUE
+SQL> /
+
+Table altered.
+
+SQL> ALTER TABLE STUDENT 
+  2  RENAME COLUMN MAILID TO EMIALID;
+
+Table altered.
+
+
+  1  ALTER TABLE STUDENT
+  2* DROP COLUMN EMIALID
+SQL> /
+
+Table altered.
+
+  1  ALTER TABLE STUDENT
+  2* MODIFY FIRSTNAME VARCHAR(60)
+SQL> /
+
+Table altered.
+
+
+
+SQL> DESC STUDENT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                NOT NULL NUMBER(38)
+ FIRSTNAME                                 NOT NULL VARCHAR2(60)
+ LASTNAME                                  NOT NULL VARCHAR2(50)
+ EMAIL                                              VARCHAR2(100)
+ PHONE                                              NUMBER(10)
+ ADDRESS                                            VARCHAR2(255)
+
+
+  1  ALTER TABLE STUDENT
+  2* MODIFY FIRSTNAME VARCHAR(60) UNIQUE
+SQL> /
+
+Table altered.
+
+SQL> ALTER TABLE STUDENT
+  2  ADD ADHAR NUMBER(5) CHECK(LENGTH(ADHAR)=5);
+
+Table altered.
+
+SQL> DESC STUDENT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                NOT NULL NUMBER(38)
+ FIRSTNAME                                 NOT NULL VARCHAR2(60)
+ LASTNAME                                  NOT NULL VARCHAR2(50)
+ EMAIL                                              VARCHAR2(100)
+ PHONE                                              NUMBER(10)
+ ADDRESS                                            VARCHAR2(255)
+ ADHAR                                              NUMBER(5)
+
+
+  1  ALTER TABLE STUDENT
+  2* ADD CONSTRAINT UK_ADHAR UNIQUE(ADHAR)
+SQL> /
+
+Table altered.
+
+SQL> ALTER TABLE STUDENT
+  2  DROP CONSTRAINT UK_ADHAR;
+
+Table altered.
+
+SQL> DESC STUDENT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMERID                                NOT NULL NUMBER(38)
+ FIRSTNAME                                 NOT NULL VARCHAR2(60)
+ LASTNAME                                  NOT NULL VARCHAR2(50)
+ EMAIL                                              VARCHAR2(100)
+ PHONE                                              NUMBER(10)
+ ADDRESS                                            VARCHAR2(255)
+ ADHAR                                              NUMBER(5)
+
+SQL> SELECT CONSTRAINT_TYPE , CONSTRAINTS_NAME
+  2  FROM USER_CONSTRAINTS
+  3  WHERE TABLE_NAME = 'STUDENT';
+SELECT CONSTRAINT_TYPE , CONSTRAINTS_NAME
+                         *
+ERROR at line 1:
+ORA-00904: "CONSTRAINTS_NAME": invalid identifier
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT CONSTRAINT_TYPE , CONSTRAINT_NAME
+  2  FROM USER_CONSTRAINTS
+  3* WHERE TABLE_NAME = 'STUDENT'
+SQL> /
+
+C CONSTRAINT_NAME
+- ------------------------------
+C SYS_C005674
+C SYS_C005675
+C SYS_C005676
+C SYS_C005677
+P SYS_C005678
+U SYS_C005679
+U SYS_C005694
+C SYS_C005695
+
+8 rows selected.
+
+SQL> ALTER TABLE STUDENT
+  2  DROP CONSTRAINT SYS_C005679;
+
+Table altered.
+
+
+  1  ALTER TABLE STUDENT
+  2* ADD CONSTRAINT FK_CustomerID FOREIGN KEY(CustomerID) REFERENCES STUDENT(CustomerID)
+SQL> /
+
+Table altered.
+
+SQL> ALTER TABLE STUDENT
+  2  ADD Phone NUMBER(10) REFERENCES STUDENT(Phone);
